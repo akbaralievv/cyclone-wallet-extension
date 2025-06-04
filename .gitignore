@@ -17,5 +17,3 @@ coverage/
 
 # Misc
 ext/
-build/
-dist/

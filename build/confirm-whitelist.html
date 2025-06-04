@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Access confirmation</title>
+    <style>
+      body,
+      html {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      .container {
+        text-align: center;
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #7d2bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      #cancel {
+        background-color: rgb(143, 4, 4);
+      }
+      h1 {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>This page is not yet in the extension's white list. Confirm access</h1>
+      <button id="confirm">Confirm</button>
+      <button id="confirm_one_time">Confirm one time</button>
+      <button id="cancel">Cancel</button>
+    </div>
+  </body>
+  <script src="./scripts/components/popups/confirm-whitelist.js"></script>
+</html>

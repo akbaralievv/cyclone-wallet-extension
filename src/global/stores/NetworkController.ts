@@ -9,12 +9,7 @@ const GW_LS_KEY = 'gw';
 const normalizeGatewayUrl = (rawUrl: string | null): string => {
   if (!rawUrl || rawUrl.trim() === '') return NETWORK_GATEWAY_URL;
 
-  let url = rawUrl.trim();
-
-  // Добавляем http://, если протокол не указан
-  if (!/^https?:\/\//i.test(url)) {
-    url = `http://${url}`;
-  }
+  const url = rawUrl.trim();
 
   // Убираем лишний слэш на конце
   return url.replace(/\/+$/, '');
