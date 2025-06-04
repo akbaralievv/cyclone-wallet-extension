@@ -12,6 +12,7 @@ import {
   CreateAccountRepeatFormValues,
   CreateAccountStepConfig,
 } from './types';
+import { CopyClipboardStep } from './CopyClipboardStep/CopyClipboardStep';
 
 export type CreateAccountProps = {
   importPk?: string;
@@ -52,7 +53,8 @@ export const CreateAccount: FC<CreateAccountProps> = observer(function CreateAcc
       const values = form.getValues();
       await rootStore.vault.submitPassword(values.password);
       rootStore.wallet.addAccount(values.name, importPk);
-      onSubmitSuccess();
+      handleSubmit();
+      // onSubmitSuccess();
     } catch (e) {
       console.log(e);
     }
@@ -75,6 +77,13 @@ export const CreateAccount: FC<CreateAccountProps> = observer(function CreateAcc
           <RepeatPasswordStep formPassword={watchPassword} onSubmit={handleRepeatSubmit} />
         </FormProvider>
       ),
+      back: () => {
+        setCurrentStep(currentStep - 1);
+      },
+    },
+    {
+      title: 'Your Account Details',
+      content: <CopyClipboardStep onSubmit={onSubmitSuccess} />,
       back: () => {
         setCurrentStep(currentStep - 1);
       },

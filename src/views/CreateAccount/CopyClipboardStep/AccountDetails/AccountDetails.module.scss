@@ -1,0 +1,70 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  height: 100%;
+}
+
+.attention {
+  margin: 0 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attention-title {
+  margin-top: 8px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.attention-description {
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 500;
+  margin-top: 4px;
+  color: var(--cc-color-yellow);
+  text-align: center;
+}
+
+.account-info {
+  padding: 2px 0;
+}
+
+.content {
+  padding: 0 12px 12px;
+  height: inherit;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: inherit;
+}
+
+.private-key {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  margin-top: 7px;
+}
+
+.private-key-wrapper {
+  margin-top: 6px;
+  padding: 0 6px;
+}
+
+.private-key-title {
+  font-weight: 700;
+}
+
+.private-key-key {
+  max-width: 236px;
+  word-break: break-all;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 700;
+  opacity: 0.35;
+  margin-bottom: 15px;
+}

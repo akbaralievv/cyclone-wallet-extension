@@ -25,8 +25,13 @@ export const AccountInfo: FC<AccountInfoProps> = observer(function AccountInfo_(
   const isAccountsPathname = location.pathname === '/accounts';
 
   const account = rootStore.wallet.activeAccount;
-  if (!account) return null;
-  const truncatedName = truncateTextInMiddle(account.name, 18);
+  let finalAccount = account;
+  if (!finalAccount) {
+    finalAccount = rootStore.wallet.findAccountByAddress(rootStore.wallet.activeAddress);
+    if (!finalAccount) return null;
+  }
+
+  const truncatedName = truncateTextInMiddle(finalAccount.name, 18);
 
   return (
     <div className={cn(styles.root, isAccountsPathname && styles.nameDropdownOpened)}>
@@ -39,7 +44,7 @@ export const AccountInfo: FC<AccountInfoProps> = observer(function AccountInfo_(
         <div className={styles.nameDropdown}>{truncatedName}</div>
       )}
       <div className={styles.copyToClipboard}>
-        <CopyToClipboard value={account.address} formatter={truncateAddress} />
+        <CopyToClipboard value={finalAccount?.address} formatter={truncateAddress} />
       </div>
     </div>
   );

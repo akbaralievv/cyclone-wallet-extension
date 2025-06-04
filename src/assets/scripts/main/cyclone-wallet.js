@@ -10,7 +10,11 @@ window.cycloneWallet = {
     return new Promise((resolve) => {
       window.postMessage({ action: actionsMap.getWalletAddress }, '*');
       window.addEventListener('message', function listener(e) {
-        if (e.data.action === actionsMap.getWalletAddress && 'walletAddress' in e.data) {
+        if (
+          e.data.action === actionsMap.getWalletAddress &&
+          typeof e.data === 'object' &&
+          'walletAddress' in e.data
+        ) {
           window.removeEventListener('message', listener);
           resolve(e.data.walletAddress);
         }
@@ -21,7 +25,11 @@ window.cycloneWallet = {
     return new Promise((resolve) => {
       window.postMessage({ action: actionsMap.getNativeBalance }, '*');
       window.addEventListener('message', function listener(e) {
-        if (e.data.action === actionsMap.getNativeBalance && 'nativeBalance' in e.data) {
+        if (
+          e.data.action === actionsMap.getNativeBalance &&
+          typeof e.data === 'object' &&
+          'nativeBalance' in e.data
+        ) {
           window.removeEventListener('message', listener);
           resolve(e.data.nativeBalance);
         }

@@ -12,10 +12,9 @@ export class Api {
   listen = (
     callback: (request: any, sender: chrome.runtime.MessageSender) => void
   ): (() => void) => {
-    const listener = (request: any, sender: chrome.runtime.MessageSender, sendResponse: any) => {
+    const listener = (request: any, sender: chrome.runtime.MessageSender) => {
       if (typeof callback !== 'function') return false;
       callback(request, sender);
-      sendResponse(true);
     };
     chrome.runtime.onMessage.addListener(listener);
 

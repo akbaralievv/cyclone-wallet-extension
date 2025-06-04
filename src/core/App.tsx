@@ -63,6 +63,11 @@ export const VaultWatcher = observer(() => {
         : null;
 
       try {
+        chrome.storage.local.set({
+          password: password ? true : false,
+          activeAccount,
+          nativeBalance,
+        });
         chrome.runtime.sendMessage({
           action: 'VAULT_PASSWORD_CHANGE',
           password,
@@ -163,60 +168,13 @@ export const App: FC = () => {
         setActionText('');
       }
     };
+
     const disposer = rootStore.api.listen(handleMessages);
 
     return () => {
       disposer();
     };
   }, [rootStore.api]);
-
-  // chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  //   if (request.action in actionsMap && request.currentDomain) {
-  //     const url = new URL(request.currentDomain);
-  //     setCurrentURL(url);
-  //     setIsOpenDialog(true);
-  //     setActiveAccount(
-  //       rootStore ? rootStore.wallet.findAccountByAddress(rootStore.wallet.activeAddress) : null
-  //     );
-
-  //     chrome.storage.local.get('whitelist', (result) => {
-  //       const whitelist = result.whitelist || {};
-  //       const accountWhitelist = whitelist[rootStore.wallet.activeAddress] || [];
-  //       const existingEntry = accountWhitelist.find(
-  //         (item: { url: string }) => item.url === (url && url.origin && url.origin)
-  //       );
-
-  //       if (existingEntry) {
-  //         setIsWhitelisted(existingEntry);
-  //       } else {
-  //         setIsWhitelisted(null);
-  //       }
-  //     });
-
-  //     switch (request.action) {
-  //       case 'getWalletAddress':
-  //         setActionText('Get the address of the current wallet');
-  //         break;
-  //       case 'getNativeBalance':
-  //         setActionText('Get the native balance of the current wallet');
-  //         break;
-  //       case 'sign':
-  //         setActionText('Sign the transaction');
-  //         break;
-  //       case 'signAndSend':
-  //         setActionText('Sign and send the transaction');
-  //         break;
-  //       default:
-  //         sendResponse(true);
-  //         break;
-  //     }
-  //     sendResponse(true);
-  //   } else {
-  //     sendResponse(false);
-  //     setIsOpenDialog(false);
-  //     setActionText('');
-  //   }
-  // });
 
   const handleConfirm = () => {
     if (checkedItems) {

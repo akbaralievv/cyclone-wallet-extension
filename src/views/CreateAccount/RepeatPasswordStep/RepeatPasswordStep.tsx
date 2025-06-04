@@ -63,7 +63,7 @@ export const RepeatPasswordStep: FC<RepeatPasswordStepProps> = (props) => {
         fullWidth
         disabled={!formContext.formState.isDirty || formContext.formState.isSubmitting}
       >
-        Get Started
+        Next
       </Button>
     </form>
   );

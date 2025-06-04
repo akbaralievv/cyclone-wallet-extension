@@ -24,6 +24,7 @@ window.addEventListener('message', async (e) => {
   if (e.data.action === actionsMap.getWalletAddress && !e.data.response) {
     try {
       const response = await chrome.runtime.sendMessage({ action: actionsMap.getWalletAddress });
+
       if (response && response.walletAddress) {
         window.postMessage(
           {
@@ -64,7 +65,11 @@ window.addEventListener('message', async (e) => {
         action: actionsMap.sign,
         data: e.data.data,
       });
-      if (response && (response.signature || 'isValid' in response)) {
+      if (
+        response &&
+        typeof response === 'object' &&
+        (response.signature || 'isValid' in response)
+      ) {
         window.postMessage(
           {
             action: actionsMap.sign,
@@ -85,7 +90,11 @@ window.addEventListener('message', async (e) => {
         data: e.data.data,
       });
 
-      if (response && ('isValid' in response || 'txHash' in response)) {
+      if (
+        response &&
+        typeof response === 'object' &&
+        ('isValid' in response || 'txHash' in response)
+      ) {
         window.postMessage(
           {
             action: actionsMap.signAndSend,

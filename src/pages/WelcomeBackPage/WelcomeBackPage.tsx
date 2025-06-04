@@ -19,10 +19,14 @@ export const WelcomeBackPage = observer(function WelcomeBackPage_() {
     }
   }, [rootStore.vault.password]);
 
+  const onSubmitSuccess = () => {
+    navigate('/');
+  };
+
   return (
     <PageLayout title="Welcome Back">
       <div className={styles.root}>
-        <WelcomeBack onSubmitSuccess={() => navigate('/')} />
+        <WelcomeBack onSubmitSuccess={onSubmitSuccess} />
       </div>
     </PageLayout>
   );
